@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "EntryPoints.Grpc.Protos";
+
+package customer;
+
+service CustomerGrpc {
+	rpc GetCustomers (EmptyRequest) returns (ResponseGetCustomers);
+	rpc GetCustomer (GetCustomerRequest) returns (ResponseGetCustomer);
+	rpc SaveCustomer (CustomerDetail) returns (ResponseGetCustomer);
+	rpc UpdateCustomer (UpdateCustomerRequest) returns (ResponseGetCustomer);
+	rpc DeleteCustomer (GetCustomerRequest) returns (ResponseMessage);
+}
+
+message GetCustomerRequest {
+	string id = 1;
+}
+
+
+message UpdateCustomerRequest {
+	string idCustomer = 1;
+	CustomerDetail customer = 2;
+}
+
+message CustomerDetail {
+	string id = 1;
+	string idType = 2;
+	string name = 3;
+	int32 age = 4;
+	string country = 5;
+	string address = 6;
+	string email = 7;
+}
+
+message EmptyRequest{
+
+}
+
+message ResponseGetCustomers {
+	string message = 1;
+	repeated CustomerDetail data = 2;
+}
+
+message ResponseGetCustomer {
+	string message = 1;
+	CustomerDetail data = 2;
+}
+
+message ResponseMessage {
+	string message = 1;
+}
